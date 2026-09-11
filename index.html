@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Artem Zadvoryanskiy · Senior Product &amp; Data Analyst</title>
+  <meta name="description" content="Product analytics case studies on real public data: from raw events to a decision and a test design.">
+  <meta property="og:title" content="Artem Zadvoryanskiy · Senior Product & Data Analyst">
+  <meta property="og:description" content="Product analytics case studies on real public data: from raw events to a decision and a test design.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://azadvoryanskiy.github.io/">
+  <meta property="og:image" content="https://azadvoryanskiy.github.io/assets/kkbox-manual-share.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a78d6'/%3E%3Ctext x='32' y='42' font-family='system-ui,sans-serif' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3EAZ%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Artem Zadvoryanskiy</h1>
+    <p class="role">Senior Product &amp; Data Analyst</p>
+    <p>I help product teams decide what to change, and then check whether it worked.
+       Seven years of SQL, Python and A/B testing across B2B SaaS, a real estate
+       marketplace, lending and food delivery: AgencyAnalytics, CoreLogic, Vault Credit,
+       Opal Balance and Uber Eats.</p>
+    <p>My work at those companies is under NDA, so this page shows case studies on public
+       data instead. Each one starts from raw data and ends with a decision and a way to
+       test it, not with a chart.</p>
+    <p>Based in Calgary, open to remote roles in Canada.</p>
+    <nav class="contacts" aria-label="Contacts">
+      <a href="mailto:artemzad@gmail.com">artemzad@gmail.com</a>
+      <a href="https://www.linkedin.com/in/LINKEDIN_HANDLE/">LinkedIn</a>
+      <a href="https://github.com/azadvoryanskiy">GitHub</a>
+    </nav>
+  </header>
+
+  <h2 class="section">Case studies</h2>
+
+  <article class="card">
+    <div class="meta"><span class="tag">Subscriptions</span><span>Product analytics, end to end</span></div>
+    <h3>Who is a music streaming service losing, and what would I change?</h3>
+    <p>KKBox, a Taiwanese music streaming service, grew its paying base by 30% in
+       14 months, but about 3.3% of subscribers left every month, roughly as many as it
+       signed up. I modelled 23M real billing transactions and 410M days of listening to
+       find where that churn came from.</p>
+    <figure><img src="assets/kkbox-manual-share.png" alt="Bar chart: manual renewals are 13% of renewal decisions and 57% of churn" width="1440" height="390"></figure>
+    <p class="label">What I found</p>
+    <ul>
+      <li>Manual renewals were 13% of renewal decisions and 57% of churn.</li>
+      <li>The first renewal is the riskiest moment: 11% of new subscribers leave there.</li>
+      <li>Channels, long plans and free trials looked bad only because their users pay manually.</li>
+      <li>Subscribers who switched to auto-renew churned at about a third of the rate of those who stayed manual.</li>
+      <li>Before any of that, the data had to be fixed: the dataset's own churn label counted 38% of "churners" who were still subscribed.</li>
+    </ul>
+    <p><span class="label">What I'd do:</span> switch auto-renew on by default at checkout in the
+       channels where most people pay manually, and test it on churn at the first renewal,
+       with checkout conversion as a guardrail.</p>
+    <div class="links">
+      <a href="https://github.com/azadvoryanskiy/kkbox-subscription-analytics/blob/main/docs/case_study.md">Case study</a>
+      <a href="https://azadvoryanskiy.github.io/kkbox-subscription-analytics/">Dashboard</a>
+      <a href="https://github.com/azadvoryanskiy/kkbox-subscription-analytics">Code</a>
+    </div>
+    <p class="tools">SQL (DuckDB) · Python · survival analysis · logistic regression · A/B test design</p>
+  </article>
+
+  <article class="card next">
+    <div class="meta"><span class="tag">Gaming</span><span>Experimentation</span><span class="status">In progress</span></div>
+    <h3>Should we ship this change?</h3>
+    <p>An A/B test on a simulated mobile game where the true effects are known: sample size,
+       the four ways tests go wrong in practice, CUPED, and a ship / don't ship memo.</p>
+  </article>
+
+  <article class="card next">
+    <div class="meta"><span class="tag">Crypto</span><span>AI-assisted analytics</span><span class="status">In progress</span></div>
+    <h3>How much of an analyst's work can an AI agent take?</h3>
+    <p>An agent connected to BigQuery on-chain data through MCP, with a metric layer so it
+       can't invent definitions, and an honest look at where it still needs a human.</p>
+  </article>
+
+  <footer>Hand-built HTML and CSS, hosted on GitHub Pages.</footer>
+</main>
+</body>
+</html>
