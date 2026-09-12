@@ -94,13 +94,30 @@
         </a>
       </article>
 
-      <article class="card span-6 soon">
-        <div class="tags"><span class="tag">Gaming</span><span class="tag">Experimentation</span></div>
-        <span class="pill">In progress</span>
-        <h3>Should we ship this change?</h3>
-        <p>An A/B test on a simulated mobile game where the true effects are known: sample size, the four ways tests go wrong in practice, CUPED, and a ship or don't-ship memo.</p>
+      <article class="card span-12 feature">
+        <div>
+          <div class="tags"><span class="tag hot">Gaming</span><span class="tag">Experimentation</span><span class="tag">Known true effect</span></div>
+          <h3>Should we ship this change?</h3>
+          <p class="lede">A mobile game tests a second chance after a failed level. The straight comparison of the two groups found nothing — +0.35%, interval through zero. Subtracting each player's own fortnight before the test returned +1.0%, against a true effect of +1.09%. Same data, same estimator, opposite decision.</p>
+          <div class="chips">
+            <div class="chip"><b>15/15</b><span>intervals covered the true effect, adjusted and not</span></div>
+            <div class="chip"><b>150×</b><span>how wrong it goes if you analyse only the players who saw the feature</span></div>
+            <div class="chip"><b>26%</b><span>of experiments where nothing happened still report a finding, from 15 uncorrected metrics</span></div>
+          </div>
+          <p class="rec"><b>What I'd do:</b> ship it with a 5% holdback for six months, stop quoting revenue entirely — that interval runs from −1.5% to +11.9% — and make targeting the next experiment, since the effect lands on players who get stuck and passes everyone else by.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://github.com/azadvoryanskiy/mobile-game-experimentation/blob/main/docs/case_study.md">Read the case study</a>
+            <a class="btn" href="https://azadvoryanskiy.github.io/mobile-game-experimentation/">Try the power calculator</a>
+            <a class="btn" href="https://github.com/azadvoryanskiy/mobile-game-experimentation">Code</a>
+          </div>
+          <p class="trust"><b>What the raw comparison was paying for:</b> the two groups had differed very slightly before the test — ordinary randomisation noise, nowhere near flagging on any balance check. And the true answer is on file because the world is simulated to the rollout, then run to the end twice with every random draw keyed to what it decides, so a player meets identical luck in both arms.</p>
+        </div>
+        <a class="shot" href="https://azadvoryanskiy.github.io/mobile-game-experimentation/" aria-label="Open the sample size and power calculator">
+          <img src="assets/power-calculator.png" alt="The power calculator: players needed per arm, how long the test has to run, and the smallest effect a given sample can resolve" width="1280" height="880" loading="lazy">
+        </a>
       </article>
-      <article class="card span-6 soon">
+
+      <article class="card span-12 soon">
         <div class="tags"><span class="tag">Crypto</span><span class="tag">AI-assisted analytics</span></div>
         <span class="pill">In progress</span>
         <h3>How much of an analyst's work can an AI agent take?</h3>
