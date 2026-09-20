@@ -94,17 +94,40 @@
         </a>
       </article>
 
+      <article class="card span-12 feature">
+        <div>
+          <div class="tags"><span class="tag hot">Data quality</span><span class="tag">Developer platform</span><span class="tag">560M events</span></div>
+          <h3>A third of the activity vanished overnight. Did users leave?</h3>
+          <p class="lede">GitHub's public activity fell 34% between a Friday and a Saturday in May 2025 and never recovered. It was not users. Every event type and every kind of account fell by the same third, and no hour of any day since has gone above ~169,000 events — a rate cap on the feed, not a change in behaviour. I worked through 560 million real events on a laptop to show it.</p>
+          <div class="chips">
+            <div class="chip"><b>47</b><span>bad rows the standard cleaning checklist found, in 108M</span></div>
+            <div class="chip"><b>37.5%</b><span>of activity is automation; the usual [bot] filter finds two thirds of it</span></div>
+            <div class="chip"><b>8–12&times;</b><span>more often GitHub deletes the accounts my rules flag</span></div>
+          </div>
+          <p class="rec"><b>What I'd do:</b> run the completeness check automatically on any metric that moves more than 15% in a day, and report the automation share beside every headline number instead of letting it hide inside "active users".</p>
+          <div class="actions">
+            <a class="btn primary" href="https://azadvoryanskiy.github.io/github-product-analytics/">Read the case study</a>
+            <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics/blob/main/notebooks/01_data_quality.ipynb">Open the notebook</a>
+            <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics">Code</a>
+          </div>
+          <p class="trust"><b>The standard checklist passed and the data was still wrong:</b> duplicates, missing values and types came back clean on 108 million rows.</p>
+        </div>
+        <a class="shot" href="https://azadvoryanskiy.github.io/github-product-analytics/" aria-label="Read the GitHub data-quality case study">
+          <img src="assets/github-data-quality.png" alt="Daily GitHub events from April to September 2025, falling sharply and permanently on 24 May" width="1328" height="650" loading="lazy">
+        </a>
+      </article>
+
       <article class="card span-6 soon">
-        <div class="tags"><span class="tag">Gaming</span><span class="tag">Product analytics</span></div>
+        <div class="tags"><span class="tag">Activation</span><span class="tag">Developer platform</span></div>
         <span class="pill">In progress</span>
-        <h3>What keeps players in a game, and what makes them pay?</h3>
-        <p>Player behaviour inside a game: which features people actually use, what separates the players who stay from the ones who leave, and where the money comes from.</p>
+        <h3>What happens in a new account's first days, and who comes back?</h3>
+        <p>New GitHub accounts, followed for a month: what the ones who return did in their first week, what the ones who vanish did instead, and how long the window stays open.</p>
       </article>
       <article class="card span-6 soon">
-        <div class="tags"><span class="tag">Crypto</span><span class="tag">AI-assisted analytics</span></div>
+        <div class="tags"><span class="tag">Feature usage</span><span class="tag">Retention</span></div>
         <span class="pill">In progress</span>
-        <h3>How much of an analyst's work can an AI agent take?</h3>
-        <p>An agent connected to BigQuery on-chain data through MCP, with a metric layer so it can't invent definitions, and an honest look at where it still needs a human.</p>
+        <h3>Which features do the teams that stay actually use?</h3>
+        <p>Which parts of the product a team picks up in its first month, and whether any of it still predicts survival once you compare teams at the same level of overall activity.</p>
       </article>
 
       <div class="card span-6 tools" id="approach">
