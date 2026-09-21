@@ -117,17 +117,34 @@
         </a>
       </article>
 
-      <article class="card span-6 soon">
-        <div class="tags"><span class="tag">Activation</span><span class="tag">Developer platform</span></div>
-        <span class="pill">In progress</span>
-        <h3>What happens in a new account's first days, and who comes back?</h3>
-        <p>New GitHub accounts, followed for a month: what the ones who return did in their first week, what the ones who vanish did instead, and how long the window stays open.</p>
+      <article class="card span-12 feature">
+        <div>
+          <div class="tags"><span class="tag hot">Activation</span><span class="tag">Cohort analysis</span><span class="tag">1.5M newcomers</span></div>
+          <h3>A million people a week open an account. How many come back?</h3>
+          <p class="lede">Nine weekly signup cohorts on GitHub, followed for four weeks. Only 15% of new accounts ever do anything public, and only a third of those return on a second day. The obvious way to define "a newcomer" — the first time an account appears in the data — turned out to have a median account age of 1,040 days, so the first job was building a cohort that was actually new.</p>
+          <div class="chips">
+            <div class="chip"><b>216/216</b><span>cohort boundary checks correct, verified against the API</span></div>
+            <div class="chip"><b>1 in 3</b><span>of every effect was eagerness, not the action itself</span></div>
+            <div class="chip"><b>1 in 5</b><span>newcomers who post something get any reply at all</span></div>
+          </div>
+          <p class="rec"><b>What I'd do:</b> route a first-time contributor's first post to a human within 24 hours, and stop counting stars and forks as onboarding progress — they are the strongest negative signal in the data. Sized as an A/B test: 3,956 per arm for three points.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://azadvoryanskiy.github.io/github-product-analytics/activation.html">Read the case study</a>
+            <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics/blob/main/notebooks/02_activation.ipynb">Open the notebook</a>
+            <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics">Code</a>
+          </div>
+          <p class="trust"><b>Every comparison is run twice:</b> raw, and again at matched day-one activity — because eager newcomers do more of everything and come back more often.</p>
+        </div>
+        <a class="shot" href="https://azadvoryanskiy.github.io/github-product-analytics/activation.html" aria-label="Read the activation case study">
+          <img src="assets/github-activation.png" alt="Return rates with and without a reply, across four bands of first-day activity; the gap holds in every band" width="1080" height="480" loading="lazy">
+        </a>
       </article>
-      <article class="card span-6 soon">
-        <div class="tags"><span class="tag">Feature usage</span><span class="tag">Retention</span></div>
+
+      <article class="card span-12 soon">
+        <div class="tags"><span class="tag">Feature usage</span><span class="tag">Retention</span><span class="tag">Dashboard</span></div>
         <span class="pill">In progress</span>
-        <h3>Which features do the teams that stay actually use?</h3>
-        <p>Which parts of the product a team picks up in its first month, and whether any of it still predicts survival once you compare teams at the same level of overall activity.</p>
+        <h3>Which features do the people who stay actually use?</h3>
+        <p>How often each part of the product is used, and whether any of it still predicts retention once you compare people at the same level of overall activity. Built as a dashboard you can click through, not a write-up.</p>
       </article>
 
       <div class="card span-6 tools" id="approach">
