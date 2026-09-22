@@ -140,11 +140,27 @@
         </a>
       </article>
 
-      <article class="card span-12 soon">
-        <div class="tags"><span class="tag">Feature usage</span><span class="tag">Retention</span><span class="tag">Dashboard</span></div>
-        <span class="pill">In progress</span>
-        <h3>Which features do the people who stay actually use?</h3>
-        <p>How often each part of the product is used, and whether any of it still predicts retention once you compare people at the same level of overall activity. Built as a dashboard you can click through, not a write-up.</p>
+      <article class="card span-12 feature">
+        <div>
+          <div class="tags"><span class="tag hot">Feature usage</span><span class="tag">Retention</span><span class="tag">Interactive dashboard</span></div>
+          <h3>Which features keep people on the platform?</h3>
+          <p class="lede">Almost none of them on their own. Feature usage and 90-day retention for 5.9 million GitHub accounts: every feature looks like a retention driver until you compare people who were active the same number of days. Then most of the gaps collapse, and the two most-used features in the product — pushing code and creating repositories — turn negative.</p>
+          <div class="chips">
+            <div class="chip"><b>+39 → +12.8</b><span>code review, once activity is held constant</span></div>
+            <div class="chip"><b>−2.7</b><span>pushing code, the thing 62% of accounts do</span></div>
+            <div class="chip"><b>19.5 → 67.5%</b><span>retention from one feature used to five</span></div>
+          </div>
+          <p class="rec"><b>What I'd do:</b> stop asking which feature to push and aim at the second and third one instead — breadth is the only relationship that survives every cut. Code review is the single feature worth a real try: biggest matched effect, reached by 3.4% of accounts.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://azadvoryanskiy.github.io/github-product-analytics/features.html">Open the dashboard</a>
+            <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics/blob/main/docs/03-features.md">Read the write-up</a>
+            <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics">Code</a>
+          </div>
+          <p class="trust"><b>The switch is the point:</b> one click turns the raw comparison into a matched one, and a manager can watch two thirds of the effect disappear.</p>
+        </div>
+        <a class="shot" href="https://azadvoryanskiy.github.io/github-product-analytics/features.html" aria-label="Open the feature usage dashboard">
+          <img src="assets/github-features.png" alt="Raw versus activity-matched retention gaps for eleven GitHub features; every gap shrinks and three go negative" width="1425" height="777" loading="lazy">
+        </a>
       </article>
 
       <div class="card span-6 tools" id="approach">
