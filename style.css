@@ -287,6 +287,10 @@ ul, ol { padding: 0; list-style: none; }
 }
 
 /* ---------- tablet and phone ---------- */
+@media (max-width: 1100px) {
+  .motion .rail { display: none; }
+}
+
 @media (max-width: 1024px) {
   .menu { display: none; }
   .bar { grid-template-columns: 1fr auto; }
