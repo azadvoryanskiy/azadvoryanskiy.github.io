@@ -63,13 +63,24 @@ async function theatre() {
   }
 
   // Each giant word is sized to run edge to edge, but never taller than 62% of the screen.
+  // The hero word also has to clear the headline under it, which matters on short laptop screens.
   const probe = document.createElement("canvas").getContext("2d");
+  const CAP = 0.38;                                   // half the height of Unbounded's capitals, in em
   function fitWords() {
     probe.font = "900 100px Unbounded";
+    const sayTop = $(".hero-say").getBoundingClientRect().top - el.getBoundingClientRect().top;
     words.forEach((w) => {
       const width = probe.measureText(w.textContent.toUpperCase()).width / 100;
-      const size = Math.min((innerWidth * 1.04) / width, innerHeight * 0.62 / 0.82);
+      let size = Math.min((innerWidth * 1.04) / width, innerHeight * 0.62 / 0.82);
+      let centre = innerHeight / 2;
+      if (w.dataset.word === "hero") {
+        const top = 96, bottom = sayTop - 24;
+        size = Math.min(size, (bottom - top) / (2 * CAP));
+        // On a phone the panels fill the middle, so the word sits just above the headline.
+        centre = innerWidth < 768 ? bottom - CAP * size : Math.min(centre, bottom - CAP * size);
+      }
       w.style.setProperty("--size", `${size.toFixed(1)}px`);
+      w.style.top = `${centre.toFixed(1)}px`;
     });
   }
 
