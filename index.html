@@ -3,386 +3,236 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Artem Zadvoryanskiy · Senior Product &amp; Data Analyst</title>
-  <meta name="description" content="Senior Product & Data Analyst. Case studies on real public data, from raw events to a decision and a test design.">
-  <meta name="theme-color" content="#09090b">
-  <meta property="og:title" content="Artem Zadvoryanskiy · Senior Product & Data Analyst">
-  <meta property="og:description" content="I turn messy product data into decisions, and then test them. Case studies on real public data.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://azadvoryanskiy.github.io/">
-  <meta property="og:image" content="https://azadvoryanskiy.github.io/assets/kkbox-dashboard.png">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff6a3d'/%3E%3Ctext x='32' y='42' font-family='system-ui,sans-serif' font-size='27' font-weight='800' fill='%23140a06' text-anchor='middle'%3EAZ%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>Artem Zadvoryanskiy · Senior Product & Data Analyst</title>
+  <meta name="description" content="Five analytics projects on real data, one per skill: SQL, Excel, Tableau, Python and data engineering. Each starts with a business question and ends with a recommendation.">
+  <meta name="theme-color" content="#0A0A0A">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23D6FA50'/%3E%3Ctext x='32' y='41' font-family='Arial Black,sans-serif' font-size='24' font-weight='900' fill='%230A0A0A' text-anchor='middle'%3EAZ%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/onest-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* ---- the scroll story on top of the regular page ---- */
-    #stage { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; pointer-events: none; }
-    .wrap { position: relative; z-index: 1; }
-    .top {
-      position: fixed; z-index: 30; left: 0; right: 0; top: 0;
-      padding: 18px clamp(16px, 3.2vw, 64px) 26px;
-      background: linear-gradient(rgba(9, 9, 11, .9), rgba(9, 9, 11, 0));
-    }
-    .story { position: relative; height: 620vh; }
-    .scenes { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
-    .cap { position: absolute; }
-    .js .cap { opacity: 0; visibility: hidden; will-change: opacity, transform, filter; }
-    .js .cap.live { visibility: visible; }
-    .cap a { pointer-events: auto; }
-    .skip { position: absolute; left: 12px; top: -60px; z-index: 40; pointer-events: auto; }
-    .skip:focus { top: 12px; }
-
-    .opener { left: clamp(16px, 3.2vw, 64px); right: clamp(16px, 3.2vw, 64px); bottom: 11vh; max-width: 860px; }
-    .opener::before {
-      content: ""; position: absolute; inset: -12vh -30vw -12vh -10vw; z-index: -1;
-      background: radial-gradient(closest-side, rgba(9, 9, 11, .78), transparent);
-    }
-    .who { display: flex; align-items: center; gap: 14px; color: var(--ink-2); font-size: 15px; }
-    .who img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px rgba(255, 106, 61, .35); }
-    .who b { color: var(--ink); font-weight: 600; }
-    .opener h1 { font: 700 clamp(40px, 5.6vw, 96px)/1.02 var(--head); letter-spacing: -0.035em; margin: 22px 0 18px; max-width: 13ch; }
-    .opener h1 em { font-style: normal; color: var(--accent); }
-    .opener .sub { color: var(--ink-2); font-size: clamp(17px, 1.3vw, 21px); margin: 0 0 20px; max-width: 46ch; }
-    .opener .status { margin-bottom: 24px; }
-    .hint { display: inline-flex; align-items: center; gap: 12px; margin-top: 34px; color: var(--muted); font-size: 13px; }
-    .hint i { display: block; width: 1px; height: 34px; background: linear-gradient(var(--ink-2), transparent); }
-    @media (prefers-reduced-motion: no-preference) {
-      .hint i { animation: drip 2.4s cubic-bezier(.6, 0, .3, 1) infinite; transform-origin: top; }
-      @keyframes drip { 0% { transform: scaleY(0); opacity: 1; } 55% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
-    }
-
-    .step { left: clamp(16px, 3.2vw, 64px); top: 21vh; width: min(460px, 34vw); }
-    .step .num { color: var(--accent); font: 600 13px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; margin: 0; }
-    .step h2 { font: 700 clamp(28px, 2.9vw, 48px)/1.08 var(--head); letter-spacing: -0.03em; margin: 14px 0 16px; text-wrap: balance; }
-    .step p { color: var(--ink-2); margin: 0 0 14px; font-size: 16px; }
-    .step .more { display: inline-flex; gap: 8px; align-items: center; color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none; margin-top: 8px; }
-    .step .more:hover { color: var(--accent); }
-
-    .rowcard {
-      margin-top: 20px; border: 1px solid var(--line-strong); border-radius: 14px; padding: 14px 16px;
-      background: rgba(20, 20, 23, .78); font: 12.5px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    }
-    .rowcard .file { color: var(--muted); margin: 0 0 8px; font-size: 12px; }
-    .rowcard dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 16px; margin: 0; }
-    .rowcard dt { color: var(--muted); }
-    .rowcard dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
-    .rowcard .hot, .rowcard .hot + dd { color: var(--accent); font-weight: 600; }
-
-    .pin { position: absolute; left: 0; top: 0; white-space: nowrap; font: 600 13px/1.3 var(--body); color: var(--ink); }
-    .pin > span { position: absolute; left: 10px; top: 0; transform: translateY(-50%); }
-    .pin.center > span { left: 0; transform: translate(-50%, -50%); }
-    .pin.lefty > span { left: auto; right: 10px; }
-    .pin small { display: block; color: var(--ink-2); font-weight: 500; font-size: 12px; }
-    .pin.hot { color: var(--accent); }
-
-    /* after the story, the regular page scrolls over a dimmed scene */
-    .after { position: relative; z-index: 4; padding-top: 12px; }
-    .about h2 { font: 700 clamp(26px, 2.4vw, 40px)/1.12 var(--head); letter-spacing: -0.025em; margin: 0 0 14px; max-width: 22ch; }
-    .about .sub { color: var(--ink-2); margin: 0 0 22px; max-width: 58ch; }
-
-    /* no WebGL, or the scene failed to load: plain, readable text */
-    .static .story { height: auto; }
-    .static .scenes { position: relative; inset: auto; display: grid; gap: 64px; padding: 140px 0 40px; }
-    .static .cap { position: relative; inset: auto; left: auto; right: auto; top: auto; bottom: auto; width: auto; opacity: 1 !important; visibility: visible !important; transform: none !important; filter: none !important; }
-    .static .pin { display: none; }
-
-    @media (max-width: 760px) {
-      .top { padding-bottom: 18px; }
-      .opener { bottom: 8vh; }
-      .step { left: 16px; right: 16px; width: auto; top: auto; bottom: 7vh; }
-      .step h2 { font-size: 27px; }
-      .step p { font-size: 15px; }
-      .rowcard { font-size: 11.5px; }
-      .rowcard dl { grid-template-columns: auto 1fr; }
-      .pin { font-size: 11.5px; }
-      .pin small { display: none; }
-    }
-  </style>
   <script>
-    document.documentElement.classList.add('js');
-    window.__stage = false;
-    setTimeout(function () { if (!window.__stage) document.documentElement.classList.add('static'); }, 9000);
+    // Motion only when the visitor hasn't asked for less of it and WebGL works.
+    // Without the class the page is a plain, fully readable document.
+    (function () {
+      var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var gl = false;
+      try { gl = !!document.createElement("canvas").getContext("webgl2"); } catch (e) {}
+      if (!calm && gl) document.documentElement.classList.add("motion");
+    })();
+  </script>
+  <script type="importmap">
+    { "imports": {
+        "three": "./vendor/three/three.module.js",
+        "three/addons/": "./vendor/three/addons/"
+    } }
   </script>
 </head>
 <body>
-<a class="btn skip" href="#work">Skip to the case studies</a>
-<canvas id="stage" aria-hidden="true"></canvas>
 
-<header class="top">
-  <a class="logo" href="#">Artem Zadvoryanskiy<span>.</span></a>
-  <nav class="nav" aria-label="Sections">
+<a class="skip" href="#work">Skip to the projects</a>
+
+<header class="bar" id="top">
+  <a class="logo" href="#top" aria-label="Artem Zadvoryanskiy, back to the top">Artem<span> Zadvoryanskiy</span></a>
+  <nav class="menu" aria-label="Sections">
     <a href="#work">Work</a>
-    <a href="#story">How I work</a>
+    <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
-  <a class="btn" href="mailto:artemzad@gmail.com">Email me
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+  <div class="bar-end">
+    <span class="clock" aria-label="Local time in Calgary"><span>Calgary</span> <time data-clock>--:--</time></span>
+    <a class="pill pill-volt" href="mailto:artemzad@gmail.com">Email me <i aria-hidden="true">↗</i></a>
+  </div>
 </header>
 
-<div class="wrap">
-  <main>
-    <section class="story" id="story" aria-label="How I work, in four steps">
-      <div class="scenes">
-        <div class="cap opener" data-cue="-1 -0.5 0.035 0.075">
-          <div class="who"><img src="assets/photo.jpg" alt="" width="104" height="104"><span><b>Artem Zadvoryanskiy</b> · Calgary, Canada</span></div>
-          <h1>Senior Product &amp; <em>Data Analyst</em></h1>
-          <p class="sub">I turn messy product data into decisions, and then test them. Seven years of SQL and experiments across B2B SaaS, a real estate marketplace, lending and food delivery.</p>
-          <div class="status"><span class="dot"></span>Open to remote Senior Product and Data Analyst roles in Canada</div>
-          <div class="actions">
-            <a class="btn primary" href="#work">See the case studies
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
-            <a class="btn" href="mailto:artemzad@gmail.com">artemzad@gmail.com</a>
-          </div>
-          <div class="hint"><i></i>Scroll to see how I work, in four steps</div>
-        </div>
-
-        <div class="cap step" data-cue="0.2 0.24 0.33 0.37">
-          <p class="num">01 · Start from one row</p>
-          <h2>Every analysis starts with one row.</h2>
-          <p>Before any chart I read what one row of the raw data means, then follow one real person through it. This one is a KKBox subscriber who renews by hand.</p>
-          <div class="rowcard">
-            <p class="file">transactions.csv, KKBox (WSDM Cup 2018)</p>
-            <dl>
-              <dt>msno</dt><dd>svvuo4JCElN6TLQZUrMPLuZMpRwcaePM02X3ybNN1dg=</dd>
-              <dt>payment_method_id</dt><dd>38</dd>
-              <dt>payment_plan_days</dt><dd>30</dd>
-              <dt>plan_list_price</dt><dd>149</dd>
-              <dt>actual_amount_paid</dt><dd>149</dd>
-              <dt class="hot">is_auto_renew</dt><dd>0</dd>
-              <dt>transaction_date</dt><dd>20151130</dd>
-              <dt>membership_expire_date</dt><dd>20151230</dd>
-              <dt>is_cancel</dt><dd>0</dd>
-            </dl>
-          </div>
-        </div>
-
-        <div class="cap step" data-cue="0.43 0.47 0.64 0.68">
-          <p class="num">02 · Check the data first</p>
-          <h2>A third of GitHub vanished overnight. Nobody left.</h2>
-          <p>Public activity fell 34% between a Friday and a Saturday in May 2025. Every event type and every kind of account fell by the same third, and no hour since has gone above ~169,000 events.</p>
-          <p>That is a rate cap on the data feed, not a change in behaviour. The standard cleaning checklist passed on 108 million rows and missed it.</p>
-        </div>
-
-        <div class="cap step" data-cue="0.72 0.76 0.83 0.86">
-          <p class="num">03 · Find where it comes from</p>
-          <h2>13% of renewals. 57% of churn.</h2>
-          <p>At KKBox, subscribers who renewed by hand made 13% of renewal decisions and 57% of all churn. Channels, plans and free trials all looked guilty until payment type was held fixed.</p>
-        </div>
-
-        <div class="cap step" data-cue="0.855 0.885 0.955 0.985">
-          <p class="num">04 · End with a test</p>
-          <h2>Auto-renew on by default. Then test it.</h2>
-          <p>Primary metric: churn at the first renewal, baseline about 27%. About 7,500 subscribers per group to catch a 2-point drop, with checkout conversion as a guardrail.</p>
-          <a class="more" href="#work">See all four case studies
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
-        </div>
-
-        <div class="cap pin center" data-pin="cliff" data-cue="0.5 0.54 0.64 0.68" aria-hidden="true"><span>24 May 2025</span></div>
-        <div class="cap pin hot center" data-pin="lost" data-cue="0.52 0.56 0.64 0.68" aria-hidden="true"><span>The missing third</span></div>
-        <div class="cap pin center" data-pin="left" data-cue="0.74 0.77 0.83 0.86" aria-hidden="true"><span>Renewal decisions</span></div>
-        <div class="cap pin center" data-pin="right" data-cue="0.74 0.77 0.83 0.86" aria-hidden="true"><span>Churn</span></div>
-        <div class="cap pin hot" data-pin="decisions" data-cue="0.74 0.77 0.83 0.86" aria-hidden="true"><span>13%<small>renewed by hand</small></span></div>
-        <div class="cap pin hot" data-pin="churn" data-cue="0.74 0.77 0.83 0.86" aria-hidden="true"><span>57%<small>renewed by hand</small></span></div>
-        <div class="cap pin center" data-pin="split" data-cue="0.87 0.895 0.955 0.985" aria-hidden="true"><span>New sign-ups, split at random</span></div>
-        <div class="cap pin lefty" data-pin="a" data-cue="0.87 0.895 0.955 0.985" aria-hidden="true"><span>A · as today</span></div>
-        <div class="cap pin hot lefty" data-pin="b" data-cue="0.87 0.895 0.955 0.985" aria-hidden="true"><span>B · auto-renew on at checkout</span></div>
+<main>
+  <div class="theatre" id="theatre">
+    <div class="stage">
+      <div class="light" aria-hidden="true"></div>
+      <div class="monument" aria-hidden="true">
+        <span data-word="hero">Analyst</span>
+        <span data-word="0">SQL</span>
+        <span data-word="1">Excel</span>
+        <span data-word="2">Tableau</span>
+        <span data-word="3">Python</span>
+        <span data-word="4">Pipeline</span>
       </div>
-    </section>
+      <canvas class="gl" aria-hidden="true"></canvas>
 
-    <div class="after">
-      <div class="section-head" id="work">
-        <div>
-          <p class="eyebrow">Case studies</p>
-          <h2>From raw data to a decision</h2>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="corner corner-tl"><i class="dot" aria-hidden="true"></i>Open to remote roles in Canada</p>
+        <p class="corner corner-tr">2026</p>
+        <div class="hero-say">
+          <h1 id="hero-title"><span class="hero-role">Senior Product &amp; Data Analyst.</span> Seven years of SQL, experiments and product decisions.</h1>
+          <div class="actions">
+            <a class="pill pill-volt" href="#work">See the work <i aria-hidden="true">↓</i></a>
+            <a class="pill pill-ghost" href="https://www.linkedin.com/in/artemzad/">LinkedIn <i aria-hidden="true">↗</i></a>
+          </div>
         </div>
-        <p>My work at past companies is under NDA, so these use real public data. Each one ends with a decision and a way to test it, not with a chart.</p>
+        <p class="hero-note">Five projects on real data, one per skill. Each starts with a business question and ends with what I'd do about it.</p>
+        <ol class="hero-skills" aria-label="Skills, one project each">
+          <li><span>01</span>SQL</li>
+          <li><span>02</span>Excel</li>
+          <li><span>03</span>Tableau</li>
+          <li><span>04</span>Python</li>
+          <li><span>05</span>Data engineering</li>
+        </ol>
+      </section>
+
+      <div class="scenes" id="work">
+        <h2 class="sr-only">Projects</h2>
+
+        <article class="scene" data-scene="0" aria-labelledby="p0">
+          <p class="label">01 / 05 · SQL</p>
+          <h3 id="p0" class="scene-title">Who are<br>we losing?</h3>
+          <p class="scene-q">Who is a subscription service losing? Six churn questions for a music streaming service, each answered with one SQL query on 23 million real billing rows.</p>
+          <ul class="stats">
+            <li><b>3.6%</b><span>of subscribers leave each month</span></li>
+            <li><b>43%</b><span>of leavers come from the 9% who renew by hand</span></li>
+            <li><b>31%</b><span>of lapsed manual payers are back within 90 days</span></li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>SQL</li><li>DuckDB</li><li>Window functions</li><li>Gaps and islands</li></ul>
+          <div class="actions">
+            <a class="pill pill-volt" href="https://github.com/azadvoryanskiy/sql-subscription-churn">Open the project <i aria-hidden="true">↗</i></a>
+          </div>
+          <img class="poster" src="shots/sql-chart.png" alt="Bar chart: monthly manual payers are 9% of subscribers and 43% of the people who leave" loading="lazy">
+        </article>
+
+        <article class="scene" data-scene="1" aria-labelledby="p1">
+          <p class="label">02 / 05 · Excel</p>
+          <h3 id="p1" class="scene-title">$99<br>or $249?</h3>
+          <p class="scene-q">Should ZipRecruiter raise its price? A real B2B SaaS price test worked through in one workbook. At $249 a third fewer firms pay, but each pays 2.5 times as much.</p>
+          <ul class="stats">
+            <li><b>+50%</b><span>revenue per firm over five months at $249</span></li>
+            <li><b>2.5×</b><span>what each paying firm pays</span></li>
+            <li><b>0.49</b><span>retention could fall to half and $249 still breaks even</span></li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>Excel</li><li>Formulas</li><li>Goal Seek</li><li>Data Table</li><li>Charts</li></ul>
+          <div class="actions">
+            <a class="pill pill-volt" href="https://github.com/azadvoryanskiy/excel-pricing-test">Open the project <i aria-hidden="true">↗</i></a>
+            <a class="pill pill-ghost" href="https://github.com/azadvoryanskiy/excel-pricing-test/raw/main/zip-recruiter-price-test.xlsx">Workbook <i aria-hidden="true">↓</i></a>
+          </div>
+          <img class="poster" src="shots/excel-model.png" alt="The Model sheet of the pricing workbook" loading="lazy">
+        </article>
+
+        <article class="scene" data-scene="2" aria-labelledby="p2">
+          <p class="label">03 / 05 · Tableau</p>
+          <h3 id="p2" class="scene-title">Where do<br>leads leak?</h3>
+          <p class="scene-q">Where does a B2B marketplace lose its leads? An interactive dashboard on 5,998 real inbound leads and the 781 that signed.</p>
+          <ul class="stats">
+            <li><b>13%</b><span>of leads became deals</span></li>
+            <li><b>10%</b><span>of deals come from social and email, which bring 23% of leads</span></li>
+            <li><b>71%</b><span>of deals close within 30 days</span></li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>Tableau Public</li><li>LOD calculations</li><li>Dashboard actions</li></ul>
+          <div class="actions">
+            <a class="pill pill-volt" href="https://public.tableau.com/app/profile/artem.zadvoryanskiy/viz/lead-funnel/Funnel">Open the dashboard <i aria-hidden="true">↗</i></a>
+            <a class="pill pill-ghost" href="https://github.com/azadvoryanskiy/tableau-b2b-funnel">Project <i aria-hidden="true">↗</i></a>
+          </div>
+          <img class="poster" src="shots/tableau-dashboard.png" alt="The lead funnel dashboard on Tableau Public" loading="lazy">
+        </article>
+
+        <article class="scene" data-scene="3" aria-labelledby="p3">
+          <p class="label">04 / 05 · Python</p>
+          <h3 id="p3" class="scene-title">Do features<br>bring people<br>back?</h3>
+          <p class="scene-q">Do people who try more features in their first week come back? 626,616 new GitHub accounts, followed into their second month.</p>
+          <ul class="stats">
+            <li><b>29%</b><span>come back after four or more features in week one, against 9% after one</span></li>
+            <li><b>35%</b><span>of new accounts create a repository and stop there</span></li>
+            <li><b>5,900</b><span>accounts per group to test a first-push nudge</span></li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>Python</li><li>pandas</li><li>DuckDB</li><li>matplotlib</li></ul>
+          <div class="actions">
+            <a class="pill pill-volt" href="https://github.com/azadvoryanskiy/python-feature-retention/blob/main/notebooks/feature_retention.ipynb">Open the notebook <i aria-hidden="true">↗</i></a>
+            <a class="pill pill-ghost" href="https://github.com/azadvoryanskiy/python-feature-retention">Project <i aria-hidden="true">↗</i></a>
+          </div>
+          <img class="poster" src="shots/python-chart-1.png" alt="Chart: share of new accounts that come back rises from 9% with one feature to 29% with four or more" loading="lazy">
+        </article>
+
+        <article class="scene" data-scene="4" aria-labelledby="p4">
+          <p class="label">05 / 05 · Data engineering</p>
+          <h3 id="p4" class="scene-title">A pipeline<br>that runs<br>itself</h3>
+          <p class="scene-q">Which developer tools are growing? Every morning a job fetches downloads of 40 SaaS SDKs, dbt models and tests them, and the dashboard updates only if every test passes.</p>
+          <ul class="stats">
+            <li><b>40</b><span>SDKs fetched from npm and PyPI at 07:00 UTC</span></li>
+            <li><b>31</b><span>dbt tests; one failure stops the deploy</span></li>
+            <li><b>7</b><span>days npm lost its data, caught and flagged</span></li>
+          </ul>
+          <ul class="tools" aria-label="Tools"><li>GitHub Actions</li><li>dbt</li><li>DuckDB</li><li>Python</li></ul>
+          <div class="actions">
+            <a class="pill pill-volt" href="https://azadvoryanskiy.github.io/data-pipeline-sdk-downloads/">Open the dashboard <i aria-hidden="true">↗</i></a>
+            <a class="pill pill-ghost" href="https://github.com/azadvoryanskiy/data-pipeline-sdk-downloads">Project <i aria-hidden="true">↗</i></a>
+          </div>
+          <img class="poster" src="shots/pipeline-dashboard.png" alt="The live pipeline dashboard: test status, growth by product, weekly downloads" loading="lazy">
+        </article>
       </div>
 
-      <section class="bento" aria-label="Case studies">
-        <article class="card span-12 feature">
-          <div>
-            <div class="tags"><span class="tag hot">Subscriptions</span><span class="tag">Product analytics</span><span class="tag">23M transactions</span></div>
-            <h3>Who is a music streaming service losing, and what would I change?</h3>
-            <p class="lede">KKBox grew its paying base 30% in 14 months, from 904,000 to 1.18M — but that growth was running out. New sign-ups fell from 49,000 a month to 38,000 while churn stayed flat at 33,000–43,000, so by February 2017 it was losing almost exactly as many subscribers as it signed up. I modelled 23M real billing transactions and 410M days of listening to find where that churn came from.</p>
-            <div class="chips">
-              <div class="chip"><b>57%</b><span>of churn came from manual renewals, 13% of decisions</span></div>
-              <div class="chip"><b>11%</b><span>of new subscribers leave at their first renewal</span></div>
-              <div class="chip"><b>3×</b><span>less churn after switching to auto-renew</span></div>
-            </div>
-            <p class="rec"><b>What I'd do:</b> switch auto-renew on by default at checkout where most people pay manually, and test it on churn at the first renewal.</p>
-            <div class="actions">
-              <a class="btn primary" href="https://github.com/azadvoryanskiy/kkbox-subscription-analytics/blob/main/docs/case_study.md">Read the case study</a>
-              <a class="btn" href="https://azadvoryanskiy.github.io/kkbox-subscription-analytics/">Open the dashboard</a>
-              <a class="btn" href="https://github.com/azadvoryanskiy/kkbox-subscription-analytics">Code</a>
-            </div>
-            <p class="trust"><b>Before any of that, the data had to be fixed:</b> the dataset's own churn label counted 38% of "churners" who were still subscribed.</p>
-          </div>
-          <a class="shot" href="https://azadvoryanskiy.github.io/kkbox-subscription-analytics/" aria-label="Open the KKBox dashboard">
-            <img src="assets/kkbox-dashboard.png" alt="The KKBox churn dashboard: key numbers and monthly new, churned and returning subscribers" width="1280" height="880" loading="lazy">
-          </a>
-        </article>
-
-        <article class="card span-12 feature">
-          <div>
-            <div class="tags"><span class="tag hot">Data quality</span><span class="tag">Developer platform</span><span class="tag">560M events</span></div>
-            <h3>A third of the activity vanished overnight. Did users leave?</h3>
-            <p class="lede">GitHub's public activity fell 34% between a Friday and a Saturday in May 2025 and never recovered. It was not users. Every event type and every kind of account fell by the same third, and no hour of any day since has gone above ~169,000 events — a rate cap on the feed, not a change in behaviour. I worked through 560 million real events on a laptop to show it.</p>
-            <div class="chips">
-              <div class="chip"><b>47</b><span>bad rows the standard cleaning checklist found, in 108M</span></div>
-              <div class="chip"><b>37.5%</b><span>of activity is automation; the usual [bot] filter finds two thirds of it</span></div>
-              <div class="chip"><b>8–12&times;</b><span>more often GitHub deletes the accounts my rules flag</span></div>
-            </div>
-            <p class="rec"><b>What I'd do:</b> run the completeness check automatically on any metric that moves more than 15% in a day, and report the automation share beside every headline number instead of letting it hide inside "active users".</p>
-            <div class="actions">
-              <a class="btn primary" href="https://azadvoryanskiy.github.io/github-product-analytics/">Read the case study</a>
-              <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics/blob/main/notebooks/01_data_quality.ipynb">Open the notebook</a>
-              <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics">Code</a>
-            </div>
-            <p class="trust"><b>The standard checklist passed and the data was still wrong:</b> duplicates, missing values and types came back clean on 108 million rows.</p>
-          </div>
-          <a class="shot" href="https://azadvoryanskiy.github.io/github-product-analytics/" aria-label="Read the GitHub data-quality case study">
-            <img src="assets/github-data-quality.png" alt="Daily GitHub events from April to September 2025, falling sharply and permanently on 24 May" width="1328" height="650" loading="lazy">
-          </a>
-        </article>
-
-        <article class="card span-12 feature">
-          <div>
-            <div class="tags"><span class="tag hot">Activation</span><span class="tag">Cohort analysis</span><span class="tag">1.5M newcomers</span></div>
-            <h3>A million people a week open an account. How many come back?</h3>
-            <p class="lede">Nine weekly signup cohorts on GitHub, followed for four weeks. Only 15% of new accounts ever do anything public, and only a third of those return on a second day. The obvious way to define "a newcomer" — the first time an account appears in the data — turned out to have a median account age of 1,040 days, so the first job was building a cohort that was actually new.</p>
-            <div class="chips">
-              <div class="chip"><b>216/216</b><span>cohort boundary checks correct, verified against the API</span></div>
-              <div class="chip"><b>1 in 3</b><span>of every effect was eagerness, not the action itself</span></div>
-              <div class="chip"><b>1 in 5</b><span>newcomers who post something get any reply at all</span></div>
-            </div>
-            <p class="rec"><b>What I'd do:</b> route a first-time contributor's first post to a human within 24 hours, and stop counting stars and forks as onboarding progress — they are the strongest negative signal in the data. Sized as an A/B test: 3,956 per arm for three points.</p>
-            <div class="actions">
-              <a class="btn primary" href="https://azadvoryanskiy.github.io/github-product-analytics/activation.html">Read the case study</a>
-              <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics/blob/main/notebooks/02_activation.ipynb">Open the notebook</a>
-              <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics">Code</a>
-            </div>
-            <p class="trust"><b>Every comparison is run twice:</b> raw, and again at matched day-one activity — because eager newcomers do more of everything and come back more often.</p>
-          </div>
-          <a class="shot" href="https://azadvoryanskiy.github.io/github-product-analytics/activation.html" aria-label="Read the activation case study">
-            <img src="assets/github-activation.png" alt="Return rates with and without a reply, across four bands of first-day activity; the gap holds in every band" width="1080" height="480" loading="lazy">
-          </a>
-        </article>
-
-        <article class="card span-12 feature">
-          <div>
-            <div class="tags"><span class="tag hot">Feature usage</span><span class="tag">Retention</span><span class="tag">Interactive dashboard</span></div>
-            <h3>Which features keep people on the platform?</h3>
-            <p class="lede">Almost none of them on their own. Feature usage and 90-day retention for 5.9 million GitHub accounts: every feature looks like a retention driver until you compare people who were active the same number of days. Then most of the gaps collapse, and the two most-used features in the product — pushing code and creating repositories — turn negative.</p>
-            <div class="chips">
-              <div class="chip"><b>+39 → +12.8</b><span>code review, once activity is held constant</span></div>
-              <div class="chip"><b>−2.7</b><span>pushing code, the thing 62% of accounts do</span></div>
-              <div class="chip"><b>19.5 → 67.5%</b><span>retention from one feature used to five</span></div>
-            </div>
-            <p class="rec"><b>What I'd do:</b> stop asking which feature to push and aim at the second and third one instead — breadth is the only relationship that survives every cut. Code review is the single feature worth a real try: biggest matched effect, reached by 3.4% of accounts.</p>
-            <div class="actions">
-              <a class="btn primary" href="https://azadvoryanskiy.github.io/github-product-analytics/features.html">Open the dashboard</a>
-              <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics/blob/main/docs/03-features.md">Read the write-up</a>
-              <a class="btn" href="https://github.com/azadvoryanskiy/github-product-analytics">Code</a>
-            </div>
-            <p class="trust"><b>The switch is the point:</b> one click turns the raw comparison into a matched one, and a manager can watch two thirds of the effect disappear.</p>
-          </div>
-          <a class="shot" href="https://azadvoryanskiy.github.io/github-product-analytics/features.html" aria-label="Open the feature usage dashboard">
-            <img src="assets/github-features.png" alt="Raw versus activity-matched retention gaps for eleven GitHub features; every gap shrinks and three go negative" width="1425" height="777" loading="lazy">
-          </a>
-        </article>
-      </section>
-
-      <section class="bento" aria-label="About me" style="margin-top: 20px;">
-        <div class="card span-4 profile">
-          <div class="avatar"><img src="assets/photo.jpg" alt="Artem Zadvoryanskiy" width="560" height="560" loading="lazy"></div>
-          <h2>Artem Zadvoryanskiy</h2>
-          <p class="role">Calgary, Canada</p>
-          <div class="socials">
-          <a href="https://www.linkedin.com/in/artemzad/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm7 0h3.8v1.5h.06c.53-1 1.82-2.05 3.75-2.05 4 0 4.74 2.64 4.74 6.07v5.48h-4v-4.86c0-1.16-.02-2.65-1.62-2.65-1.62 0-1.87 1.26-1.87 2.57v4.94H10v-11Z"/></svg></a>
-          <a href="https://github.com/azadvoryanskiy" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
-          <a href="mailto:artemzad@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
-        </div>
-        </div>
-        <div class="card span-8 hero about">
-          <p class="hello">Hi, I'm Artem.</p>
-          <h2>Seven years of SQL, experiments and product decisions.</h2>
-          <p class="sub">B2B SaaS, a real estate marketplace, lending and food delivery. I'm most useful where a team has plenty of data and no clear answer yet.</p>
-          <div class="status"><span class="dot"></span>Open to remote Senior Product and Data Analyst roles in Canada</div>
-          <div class="actions">
-            <a class="btn primary" href="mailto:artemzad@gmail.com">artemzad@gmail.com</a>
-            <a class="btn" href="https://www.linkedin.com/in/artemzad/">LinkedIn</a>
-          </div>
-          <div class="bars" aria-hidden="true"><i style="height:26px"></i><i style="height:42px"></i><i style="height:34px"></i><i style="height:58px"></i><i style="height:72px"></i><i style="height:96px"></i></div>
-        </div>
-        <div class="card span-12 companies">
-          <h3>Where I've worked</h3>
-          <div class="logos"><span>AgencyAnalytics</span><span>CoreLogic</span><span>Voices.com</span><span>Vault Credit</span><span>Opal Balance</span><span>Uber Eats</span></div>
-        </div>
-        <div class="card span-6 tools">
-          <h3>Toolbox</h3>
-          <div class="toolset">
-            <span>SQL</span><span>Python</span><span>pandas</span><span>statsmodels</span><span>dbt</span><span>Snowflake</span><span>BigQuery</span><span>DuckDB</span><span>Mixpanel</span><span>Sigma</span><span>A/B testing</span><span>Survival analysis</span><span>Claude Code + MCP</span>
-          </div>
-        </div>
-        <div class="card span-6 approach" id="approach">
-          <h3>How I work</h3>
-          <ol>
-            <li><span><b>Start from the decision.</b>What will someone do differently once they know the answer?</span></li>
-            <li><span><b>Don't trust the data until it's checked.</b>Every dataset I've used had a trap in it.</span></li>
-            <li><span><b>End with a test.</b>A recommendation comes with the metric, the effect size and the sample it needs.</span></li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="card cta" id="contact">
-        <h2>Hiring a senior analyst?</h2>
-        <p>I'm open to remote Senior Product and Data Analyst roles in Canada. The quickest way to reach me is email.</p>
-        <div class="actions">
-          <a class="btn primary" href="mailto:artemzad@gmail.com">artemzad@gmail.com</a>
-          <a class="btn" href="https://www.linkedin.com/in/artemzad/">LinkedIn</a>
-          <a class="btn" href="https://github.com/azadvoryanskiy">GitHub</a>
-        </div>
-      </section>
-
-      <footer>
-        <span>© 2026 Artem Zadvoryanskiy</span>
-        <span>Hand-built HTML, CSS and a little WebGL, hosted on GitHub Pages</span>
-      </footer>
+      <nav class="rail" aria-label="Projects">
+        <a href="#p0" data-go="0"><span>01</span>SQL</a>
+        <a href="#p1" data-go="1"><span>02</span>Excel</a>
+        <a href="#p2" data-go="2"><span>03</span>Tableau</a>
+        <a href="#p3" data-go="3"><span>04</span>Python</a>
+        <a href="#p4" data-go="4"><span>05</span>Pipeline</a>
+      </nav>
     </div>
-  </main>
-</div>
+  </div>
 
-<script type="module">
-  import { createStage } from './cinema/engine.js';
-  import { heroCloud, rowTable, githubCliff, renewalBars, testLanes } from './cinema/scenes.js';
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>SQL · Excel · Tableau · Python · dbt · DuckDB · Snowflake · BigQuery · A/B testing · Mixpanel ·&nbsp;</span>
+      <span>SQL · Excel · Tableau · Python · dbt · DuckDB · Snowflake · BigQuery · A/B testing · Mixpanel ·&nbsp;</span>
+    </div>
+  </div>
 
-  const stage = createStage({
-    canvas: document.getElementById('stage'),
-    story: document.getElementById('story'),
-    build(n, r) {
-      const cliff = githubCliff(n, r), bars = renewalBars(n, r), lanes = testLanes(n, r);
-      const anchors = { ...cliff.anchors, ...bars.anchors, ...lanes.anchors };
-      for (const el of document.querySelectorAll('[data-pin]')) el.dataset.anchor = anchors[el.dataset.pin].join(' ');
-      //      0               1              2               3             4          5
-      return [heroCloud(n, r), rowTable(n, r), cliff.expected, cliff.actual, bars.form, lanes.form];
-    },
-    stations: [
-      { p: 0.00, f: 0, cam: [0, 1, 40], look: [0, 0, 0], drift: 0.22, lift: 0 },
-      { p: 0.10, f: 0, cam: [3.5, 1.4, 20], look: [5.5, 1.2, 5], drift: 0.2, lift: 0 },
-      { p: 0.22, f: 1, cam: [-1, 0.2, 17.5], look: [0, 1.6, 0], shift: -4.5, lift: 5.5, turb: 2.4 },
-      { p: 0.34, f: 1, cam: [1, -0.3, 18.5], look: [0, 1.2, 0], shift: -4.5, lift: 5.5 },
-      { p: 0.44, f: 2, cam: [0, 0.4, 38], look: [0, 0, 0], shift: -8.5, lift: 5.5, turb: 2.2 },
-      { p: 0.55, f: 3, cam: [0.8, 0.2, 37], look: [0.5, -0.8, 0], shift: -8.5, lift: 5.5, turb: 0.3 },
-      { p: 0.66, f: 3, cam: [0.4, 0.3, 37.5], look: [0.3, -0.6, 0], shift: -8.5, lift: 5.5 },
-      { p: 0.76, f: 4, cam: [-1, 0.4, 27], look: [0, 0, 0], shift: -4, lift: 5.5, turb: 2.2 },
-      { p: 0.86, f: 5, cam: [0, 0.2, 38], look: [0, 0, 0], shift: -8.5, lift: 5.5, pulse: 1, turb: 2 },
-      { p: 0.95, f: 5, cam: [0.5, 0.1, 37], look: [0, 0, 0], shift: -8.5, lift: 5.5, pulse: 1 },
-      { p: 1.00, f: 0, cam: [0, 2, 44], look: [0, 0, 0], drift: 0.22, fade: 0.3, lift: 0, turb: 2.6 },
-    ],
-  });
-  window.__stage = !!stage;
-</script>
+  <section class="about" id="about" data-light="paper" aria-labelledby="about-title">
+    <div class="about-head">
+      <p class="label">About</p>
+      <h2 id="about-title" class="headline">Hi, I'm<br>Artem.</h2>
+    </div>
+    <figure class="arch"><img src="assets/photo.jpg" alt="Artem Zadvoryanskiy" width="560" height="560" loading="lazy"></figure>
+    <div class="about-text">
+      <p class="voice">Seven years as a product and data analyst: B2B SaaS, a real estate marketplace, lending and food delivery.</p>
+      <p>I'm most useful where a team has plenty of data and no clear answer yet. Based in Calgary, open to remote Senior Product and Data Analyst roles in Canada.</p>
+    </div>
+
+    <div class="worked">
+      <p class="label">Where I've worked</p>
+      <ul>
+        <li>AgencyAnalytics</li><li>CoreLogic</li><li>Voices.com</li><li>Vault Credit</li><li>Opal Balance</li><li>Uber Eats</li>
+      </ul>
+    </div>
+
+    <div class="principles">
+      <p class="label">How I work</p>
+      <ol>
+        <li><b>01</b><h3>Start from the decision.</h3><p>What will someone do differently once they know the answer?</p></li>
+        <li><b>02</b><h3>Check the data first.</h3><p>Every dataset I've used had a trap in it. I find it before it finds the dashboard.</p></li>
+        <li><b>03</b><h3>End with a test.</h3><p>A recommendation comes with the metric, the effect size and the sample it needs.</p></li>
+      </ol>
+    </div>
+
+    <div class="toolbox">
+      <p class="label">Toolbox</p>
+      <ul class="tools tools-light"><li>SQL</li><li>Python</li><li>pandas</li><li>dbt</li><li>Snowflake</li><li>BigQuery</li><li>DuckDB</li><li>Tableau</li><li>Excel</li><li>Mixpanel</li><li>Sigma</li><li>A/B testing</li><li>Claude Code + MCP</li></ul>
+    </div>
+  </section>
+
+  <section class="final" id="contact" data-light="volt" aria-labelledby="contact-title">
+    <p class="label">Contact</p>
+    <h2 id="contact-title" class="display">Hiring<br>an analyst?</h2>
+    <a class="final-mail" href="mailto:artemzad@gmail.com">artemzad@gmail.com</a>
+    <div class="actions">
+      <a class="pill pill-ink" href="mailto:artemzad@gmail.com">Email me <i aria-hidden="true">↗</i></a>
+      <a class="pill pill-ink-ghost" href="https://www.linkedin.com/in/artemzad/">LinkedIn <i aria-hidden="true">↗</i></a>
+      <a class="pill pill-ink-ghost" href="https://github.com/azadvoryanskiy">GitHub <i aria-hidden="true">↗</i></a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Artem Zadvoryanskiy</span>
+  <span>Built by hand: HTML, CSS and three.js. Hosted on GitHub Pages.</span>
+</footer>
+
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
