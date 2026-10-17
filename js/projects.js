@@ -24,7 +24,7 @@ export const SCREENS = [
     back: "EXCEL",
     label: "02 · Excel",
     repo: "zip-recruiter-price-test.xlsx",
-    images: ["shots/excel-model.png", "shots/excel-summary.png"],
+    images: ["shots/excel-summary.png", "shots/excel-model.png"],
   },
   {
     id: "tableau",
